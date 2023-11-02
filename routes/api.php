@@ -1,8 +1,6 @@
 <?php
 
-use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\Api\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,5 +12,10 @@ use App\Http\Controllers\Api\UserController;
 | be assigned to the "api" middleware group. Make something great!
 |
 */
-Route::post("/login", [UserController::class, 'createUser']);
-// Route::post("/auth/login", [UserController::class, 'loginUser']);
+
+Route::group(['namespace' => 'Api'], function () {
+  Route::post('/login', 'UserController@createUser');
+  Route::group(['middleware' => ['auth:sanctum']], function() {
+    Route::any('/courseList', [CourseController::class, 'courseList']);
+  });
+});
