@@ -16,6 +16,6 @@ use Illuminate\Support\Facades\Route;
 Route::group(['namespace' => 'Api'], function () {
   Route::post('/login', 'UserController@createUser');
   Route::group(['middleware' => ['auth:sanctum']], function() {
-    Route::any('/courseList', [CourseController::class, 'courseList']);
+    Route::any('/courseList', 'CourseController@courseList');
   });
 });
