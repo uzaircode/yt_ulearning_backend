@@ -26,4 +26,34 @@ class CourseController extends Controller
             ], 500);
         }
     }
+
+    //return a course detail
+    public function courseDetail(Request $request) {
+
+        $id = $request->id;
+        try {
+            $result = Course::where('id', '=', $id)->select(
+                'id',
+                'name',
+                'user_token',
+                'description',
+                'price',
+                'lesson_num',
+                'video_length',
+                'thumbnail',
+                ) -> get();
+
+            return response()->json([
+                'code' => 200,
+                'message' => 'My course detail is here',
+                'data' => $result
+            ], 200);
+        } catch (\Throwable $throw) {
+            return response()->json([
+                'code' => 500,
+                'msg' => "The column does not exist or you have a syntax error",
+                'data' => $throw->getMessage(),
+            ], 500);
+        }
+    }
 }
