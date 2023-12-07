@@ -41,7 +41,8 @@ class CourseController extends Controller
                 'lesson_num',
                 'video_length',
                 'thumbnail',
-                ) -> get();
+                'downloadable_res',
+                ) -> first();
 
             return response()->json([
                 'code' => 200,

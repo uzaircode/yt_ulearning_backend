@@ -18,5 +18,9 @@ Route::group(['namespace' => 'Api'], function () {
   Route::group(['middleware' => ['auth:sanctum']], function() {
     Route::any('/courseList', 'CourseController@courseList');
     Route::any('/courseDetail', 'CourseController@courseDetail');
+    Route::any('/checkout', 'PayController@checkout');
   });
+  //run --> ngrok http 8000 --domain thoroughly-causal-chipmunk.ngrok-free.app
+  //https://thoroughly-causal-chipmunk.ngrok-free.app
+  Route::any('/web_go_hooks', 'PayController@web_go_hooks');
 });
